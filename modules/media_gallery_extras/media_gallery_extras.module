@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * Callback to enhance the context links of a media item in a gallery.
+ *
+ * FAPI form to confirm the action.
+ *
+ * @see media_gallery_remove_item_form()
+ */
+function media_gallery_extras_menu() {
+  $items = array();
+  $items['admin/config/media/gallery_extras'] = array(
+    'title' => 'Gallery settings extras',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('media_gallery_extras_settings_form'),
+    'access arguments' => array('administer media galleries'),
+    'file' => 'media_gallery_extras.pages.inc',
+  );
+  // JUST adding a menu item here will make a new action turn up on the
+  // media item context menu.
+  $items['media-gallery/detail/%media_gallery_mg_node/%media_gallery_mg_item/move_to_top'] = array(
+    'title' => 'Move to top of gallery',
+    'page callback' => 'media_gallery_extras_move_item_to_position_page',
+    'page arguments' => array(2, 3, 'top'),
+    // Looking for a slightly better access key for here.
+    'access callback' => 'media_gallery_edit_item_access',
+    'access arguments' => array(2, 3),
+    'load arguments' => array(2),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_INLINE,
+  );
+  $items['media-gallery/detail/%media_gallery_mg_node/%media_gallery_mg_item/move_to_bottom'] = array(
+    'title' => 'Move to bottom of gallery',
+    'page callback' => 'media_gallery_extras_move_item_to_position_page',
+    'page arguments' => array(2, 3, 'bottom'),
+    // Looking for a slightly better access key for here.
+    'access callback' => 'media_gallery_edit_item_access',
+    'access arguments' => array(2, 3),
+    'load arguments' => array(2),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_INLINE,
+  );
+  $items['media-gallery/detail/%media_gallery_mg_node/%media_gallery_mg_item/move_to/%'] = array(
+    'title' => 'Move to ...',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('media_gallery_move_to_position_form', 2, 3, 5),
+    // Looking for a slightly better access key for here.
+    'access callback' => 'media_gallery_edit_item_access',
+    'access arguments' => array(2, 3),
+    'load arguments' => array(2),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+    'file' => 'media_gallery_extras.pages.inc',
+  );
+  $items['media-gallery/detail/%media_gallery_mg_node/%media_gallery_mg_item/move_to'] = $items['media-gallery/detail/%media_gallery_mg_node/%media_gallery_mg_item/move_to/%'];
+
+  return $items;
+}
+
+/**
+ * Hijack some media_gallery behaviour.
+ *
+ * Implements hook_menu_alter().
+ */
+function media_gallery_extras_menu_alter(&$items) {
+  // Override the way images are added when using the [add media] button.
+  $items['media-gallery/add-images/%node/%']['page callback'] = 'media_gallery_extras_add_images';
+}
+
+/**
+ * Menu callback that moves an item then resets the page.
+ *
+ * @param object $node
+ *   The gallery node object.
+ * @param object $file
+ *   The file to remove from the gallery.
+ * @param string|int $position
+ *   Position in the list to move it to.
+ */
+function media_gallery_extras_move_item_to_position_page($node, $file, $position) {
+  media_gallery_extras_move_item_to_position($node, $file, $position);
+  drupal_set_message(t('The file %file was moved to %position within the gallery.', array('%file' => $file->filename, '%position' => $position)));
+  // Reload where we were. The $destination was set earlier.
+  drupal_goto();
+}
+
+
+/**
+ * Moves a media item within a gallery.
+ *
+ * @param object $node
+ *   The gallery node object.
+ * @param object $file
+ *   The file to remove from the gallery.
+ * @param string|int $position
+ *   Position in the list to move it to.
+ *
+ * @return object
+ *   The updated gallery node object.
+ */
+function media_gallery_extras_move_item_to_position($node, $file, $position) {
+  $items = &$node->media_gallery_file[LANGUAGE_NONE];
+  foreach ($items as $key => $item) {
+    if ($file->fid == _media_gallery_get_media_fid($item)) {
+      $found = $items[$key];
+      unset($items[$key]);
+      if ($position == 'top') {
+        array_unshift($items, $found);
+      }
+      elseif ($position == 'bottom') {
+        $items[] = $found;
+      }
+      elseif (is_numeric($position)) {
+        // It's a zero-based array, so lets be human and count from 1.
+        array_splice($items, $position - 1, 0, array($found));
+      }
+      else {
+        drupal_set_message('Unknown position. Please enter an integer, "top" or "bottom"', 'warning');
+        // Eek, put it back!
+        $items[$key] = $found;
+      }
+      break;
+    }
+  }
+  node_save($node);
+  return $node;
+}
+
+
+
+/**
+ * CLONE OF media_gallery_add_images()
+ *
+ * A callback to add images to a media gallery.
+ * Does the same thing, but adds new images to the FRONT of the item list.
+ *
+ * @TODO Make this a UI toggle. Right now it just DOES it.
+ *
+ * @param $node
+ *   The node to which the images should be added.
+ *
+ * @see media_gallery_add_images()
+ */
+function media_gallery_extras_add_images($node) {
+  // Unless we are toggled, defer immediately to the normal function.
+  if (variable_get('media_gallery_extras_add_items_order', 'bottom') != 'top') {
+    return media_gallery_add_images($node);
+  }
+  // The rest is a copy & paste from it...
+
+  // The caller provides a numeric array of file ids that the user selected.
+  $fids = $_POST['files'];
+
+  // Determine which file ids are already included in this gallery.
+  $items = isset($node->media_gallery_file[LANGUAGE_NONE]) ? $node->media_gallery_file[LANGUAGE_NONE] : array();
+  foreach ($items as $item) {
+    $existing_fids[$item['fid']] = TRUE;
+  }
+
+  // Add the newly selected media items to the previous list of items.
+  foreach ($fids as $fid) {
+    // Only add a selected item if it isn't already in the gallery.
+    if (empty($existing_fids[$fid])) {
+      $file = array();
+      $file['fid'] = $fid;
+      $file['display'] = 1;
+      $file['description'] = '';
+      // THIS is the only difference !! Place items at the front.
+      array_unshift($items, $file);
+    }
+  }
+  drupal_set_message(t('Adding images at the <em>front</em> of the gallery by way of media_gallery_extras'), 'status');
+
+  $node->media_gallery_file[LANGUAGE_NONE] = $items;
+  node_save($node);
+
+  drupal_json_output(array('result' => TRUE, 'items' => $items));
+}

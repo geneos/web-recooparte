@@ -1,0 +1,13 @@
+name = Media Gallery Extras (Experimental)
+description = Add a few utilities to media gallery to assist editors and manage larger galleries.
+dependencies[] = media_gallery
+core = 7.x
+package = Media
+configure = admin/config/media/gallery_extras
+
+; Information added by Drupal.org packaging script on 2015-02-20
+version = "7.x-2.0"
+core = "7.x"
+project = "media_gallery_extras"
+datestamp = "1424392983"
+
