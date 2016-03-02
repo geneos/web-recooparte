@@ -6,15 +6,15 @@ a, li a.active,
 #footer a:hover, #footer li a.active:hover, #footer-bottom a:hover, #footer-bottom li a.active:hover,
 #header a, #header-menu ul.menu li a:hover, #header-menu ul.menu li a.active, #header-menu ul.menu li ul.menu li a:hover,
 #navigation .block-superfish ul.sf-menu li a:focus, #navigation .block-superfish ul.sf-menu li a:hover, #navigation .block-superfish ul.sf-menu li a.active,
-.front .node h1.front-heading { color:#1487d4; }
+.front .node h1.front-heading { color:#ffffff; }
 
-#header-menu a, #header-menu ul.menu li a, #navigation .block-superfish ul.sf-menu li a { color:#ffffff; }
+#header-menu a, #header-menu ul.menu li a, #navigation .block-superfish ul.sf-menu li a { color:#54bdbf; }
 
 #footer a, #footer li a.active, #footer-bottom a, #footer-bottom li a.active { color:#e4e4e4; }
 
 h1, h2, h3, h4, h5, h6 { color:#1487d4; text-shadow: 1px 1px 1px #eaf1ea; }
 
-#slogan { color:#d5d5d5; }
+#slogan { color:#c05499; }
 
 #header {
 background: #2f2f2f;

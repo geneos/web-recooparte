@@ -1,3 +1,12 @@
+<?php
+  if($is_front){
+    $title = ''; // This is optional ... it removes the default Welcome to @site-name
+    $page['content']['system_main']['default_message'] = array(); // This will remove the 'No front page content has been created yet.'
+  }
+?>
+
+
+
 <!-- #header -->
 <div id="header">
 	<!-- #header-inside -->

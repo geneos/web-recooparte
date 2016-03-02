@@ -29,7 +29,7 @@ a, li a.active { text-decoration:none; }
 
 a img { border:none; outline: none; display:block; overflow:hidden; }
 
-img.masked, .field-type-image img { background:transparent url('images/pattern.png'); border:1px solid #d8d8d8; padding:5px; margin:10px 0; }
+img.masked, .field-type-image img { background:transparent url('images/pattern.png'); border:0px solid #d8d8d8; padding:0px; margin:10px 0; }
 
 img { max-width: 100%; height: auto; 
 -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -74,6 +74,8 @@ blockquote { background:transparent url('images/blockquote.png') no-repeat top l
 #main {  }
 
 #sidebar { } 
+
+#slogan { font-size:125%;  margin:5px 0 20px 0;  display:block; overflow:hidden } 
 
 .no-sidebars #main { padding-top:10px; padding-bottom:10px; }
 
@@ -200,7 +202,7 @@ text-align:center; text-transform:uppercase; font-family: "Roboto",sans-serif; d
 
 #header-menu ul.menu li.last a { padding-right:0; }
 
-#header-menu ul.menu li a:hover, #header-menu ul.menu li a.active { color:#1487d4; }
+#header-menu ul.menu li a:hover, #header-menu ul.menu li a.active { color:#c05499; }
 
 #header-menu ul.menu li a:after { content: none; }
 
@@ -544,3 +546,40 @@ ul.primary, ul.tabs { clear:both; margin:10px 0 35px 0; white-space: normal }
 ul.primary li, ul.tabs li { padding:10px 0; line-height:130%; }
 
 ul.primary li a, ul.tabs li a { margin:0; padding: 4px 1em; display: inline-block; }
+
+
+/***********Bloque sociales**************/
+
+.socials { margin: 0 0 15px; overflow: hidden; }
+
+.socials li {
+  list-style: none;
+  display: block;
+  float:left;
+  margin: 0 3px 0 0;
+  padding: 0;
+}
+
+.socials li a {
+  display: block;
+  float:left;
+  width: 27px;
+  height: 27px;
+  overflow: hidden;
+  text-indent: -999em;
+  background: url(../images/ico-socials-2.png) 0 0 no-repeat;
+}
+
+.socials li .facebook-follow { background-position: 0 0; }
+.socials li .facebook-follow:hover { background-position: 0 -27px; }
+
+.socials li .twitter-follow { background-position: -36px 0; }
+.socials li .twitter-follow:hover { background-position: -36px -27px; }
+
+.socials li .gplus-follow { background-position: -73px 0; }
+.socials li .gplus-follow:hover { background-position: -73px -27px; }
+
+.socials li .linkedin-follow { background-position: -109px 0; }
+.socials li .linkedin-follow:hover { background-position: -109px -27px; }
+/**********************/
+
