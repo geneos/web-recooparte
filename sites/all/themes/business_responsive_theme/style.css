@@ -102,7 +102,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: rgb(34, 46, 54);
+  color: #54bdbf;
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
   margin-bottom:6px;
@@ -134,7 +134,10 @@ h6 {
 }
 
 p {
-  margin-bottom:18px;
+  color: #fff;	
+  font-size: 16px;
+  margin-bottom: 18px;
+  text-align: justify;
 }
 
 table {
@@ -340,6 +343,8 @@ audio {
   Theme Design, Layout and Typography
 */
 
+
+
 #inner_header_wrapper {
   position:relative;
   margin:0 auto;
@@ -349,6 +354,7 @@ audio {
 #header {
   max-width: 1000px;
   margin: 0 auto;
+  padding-right: 20px;
 }
 
 #logo {
@@ -368,9 +374,11 @@ audio {
 }
 
 #site-title {
-  margin: 25px 0;
-  font-size:30px;
-  font-weight:bold;
+  clear: right;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: right;
 }
 
 #site-title a{
@@ -379,11 +387,11 @@ audio {
 }
 
 #site-description {
-  color: rgb(192, 84, 153);
+  color: rgb(84, 189, 191);
   margin: 0;
   float: left;
   clear: both;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 100%;
   font-style: italic;
   margin-left: 80px;
@@ -441,7 +449,7 @@ ul li, ul.menu li, ul.links li, .item-list ul li {
   text-align: center;
   padding: 13px 23px;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 16px;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -496,7 +504,7 @@ ul li, ul.menu li, ul.links li, .item-list ul li {
   margin: 0;
   background: rgb(30, 39, 48);
   border-top: 1px solid rgb(70, 69, 69);
-  font-size: 11px;
+  font-size: 14px;
   text-align: left;
   overflow: hidden;
   padding: 10px;
@@ -1315,11 +1323,14 @@ fieldset .fieldset-description { margin-top: 5px; margin-bottom: 1em; line-heigh
 
 input { margin: 2px 0; padding: 4px; }
 
-textarea { line-height: 1.5; }
+textarea { 
+	line-height: 1.5; 
+	width: 398px;}
 
 textarea.form-textarea, select.form-select { padding: 4px; }
 
-input.form-text, textarea.form-textarea, select.form-select { border: 1px solid #ccc; }
+input.form-text, textarea.form-textarea, select.form-select { border: 1px solid #ccc;  width: 451px;
+ }
 
 .password-suggestions ul li { margin-left: 1.2em; }
 
@@ -1438,11 +1449,6 @@ ol.search-results { padding-left: 0; }
   height:auto;
 }
 
-.views-field-title h2 {
-color: #54bdbf;
-}
-
-
 .slideshow-inicio .views-content-counter {
     background: rgba(0, 0, 0, 0) url("images/nav_active.png") no-repeat scroll left top;
     color: transparent;
@@ -1535,7 +1541,7 @@ float: left;
 
 #footer-area {
   position:relative;
-  color:rgb(128, 128, 128);
+  color:#fff;
 }
 
 #footer-area .column {
@@ -1570,7 +1576,8 @@ float: left;
 }
 
 .footer_inner_credit p {
-  margin:0;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .footer_credit{
@@ -1586,12 +1593,18 @@ float: left;
   margin: 0 auto;
 }
 
-.social-icons {
-  float: right;
+.social-icons-wrapper {
+	background-color: rgb(84, 189, 191);
+	height: 43px; 
 }
 
-.social-icons ul {
-  margin: 0;
+.social-icons {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.social-icons ul{
+	float: right;
 }
 
 .social-icons li {

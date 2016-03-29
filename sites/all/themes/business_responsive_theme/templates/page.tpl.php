@@ -74,17 +74,20 @@
 
 <div id="header_wrapper">
   <div id="inner_header_wrapper">
-
-    <header id="header" role="banner">
-      <?php if (theme_get_setting('social_links', 'business_responsive_theme')): ?>
-      <div class="social-icons">
-       <ul>
-        <li><a href="http://www.facebook.com/<?php echo theme_get_setting('facebook_username', 'business_responsive_theme'); ?>" target="_blank" rel="me"><img src="<?php print base_path() . drupal_get_path('theme', 'business_responsive_theme') . '/images/facebook.png'; ?>" alt="Facebook"/></a></li>
-        <li><a href="http://www.twitter.com/<?php echo theme_get_setting('twitter_username', 'business_responsive_theme'); ?>" target="_blank" rel="me"><img src="<?php print base_path() . drupal_get_path('theme', 'business_responsive_theme') . '/images/twitter.png'; ?>" alt="Twitter"/></a></li>
-        <li><a href="http://www.youtube.com/<?php echo theme_get_setting('youtube_username', 'business_responsive_theme'); ?>" target="_blank" rel="me"><img src="<?php print base_path() . drupal_get_path('theme', 'business_responsive_theme') . '/images/youtube.png'; ?>" alt="Youtube"/></a></li>
-       </ul>
+     <?php if (theme_get_setting('social_links', 'business_responsive_theme')): ?>
+      <div class="social-icons-wrapper">
+        <div class="social-icons">
+         <ul>
+          <li><a href="http://www.facebook.com/<?php echo theme_get_setting('facebook_username', 'business_responsive_theme'); ?>" target="_blank" rel="me"><img src="<?php print base_path() . drupal_get_path('theme', 'business_responsive_theme') . '/images/facebook.png'; ?>" alt="Facebook"/></a></li>
+          <li><a href="http://www.twitter.com/<?php echo theme_get_setting('twitter_username', 'business_responsive_theme'); ?>" target="_blank" rel="me"><img src="<?php print base_path() . drupal_get_path('theme', 'business_responsive_theme') . '/images/twitter.png'; ?>" alt="Twitter"/></a></li>
+          <li><a href="http://www.youtube.com/<?php echo theme_get_setting('youtube_username', 'business_responsive_theme'); ?>" target="_blank" rel="me"><img src="<?php print base_path() . drupal_get_path('theme', 'business_responsive_theme') . '/images/youtube.png'; ?>" alt="Youtube"/></a></li>
+         </ul>
+        </div>
       </div>
+         
     <?php endif; ?>
+    <header id="header" role="banner">
+     
       <?php if ($logo): ?><div id="logo"><a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><img src="<?php print $logo; ?>"/></a></div>
       <?php endif; ?>
       <h1 id="site-title">
