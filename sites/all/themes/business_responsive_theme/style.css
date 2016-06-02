@@ -389,13 +389,13 @@ audio {
 #site-description {
   color: rgb(84, 189, 191);
   margin: 0;
-  float: left;
+  float: right;
   clear: both;
   font-size: 28px;
   line-height: 100%;
   font-style: italic;
-  margin-left: 80px;
-  margin-top: 85px;
+  margin-top: -150px;
+  width: 60%;
 }
 
 #main-menu {
@@ -1091,12 +1091,51 @@ ul.secondary a.active {
 /*-------------------------------------------*
 /* Navigation
 /*-------------------------------------------*/
-.item-list .pager li {
+/*.item-list .pager li {
   background: #cfcfcf;
   border-radius: 3px;
   margin-right: 4px;
   text-shadow: 1px 1px #fff;
+}*/
+
+.item-list ul li.first {
+    padding-top: 0;
 }
+.item-list ul li.last {
+    border-bottom: medium none;
+}
+ul.pager {
+    clear: both;
+    margin-bottom: 25px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+.item-list ul.pager li {
+    border-bottom: medium none;
+    display: inline;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+ul.pager li a, ul.pager li.pager-current {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    display: block;
+    color: #54bdbf;
+    margin: 5px 3px 5px 0;
+    padding: 14px 20px;
+}
+ul.pager li a:hover, ul.pager li.pager-current {
+    background-color: #444;
+    border-color: #444;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+ 
 
 /*-------------------------------------------*
 /* Forum
@@ -1461,13 +1500,34 @@ ol.search-results { padding-left: 0; }
  
 .views-field-field-imagen-slideshow  {
     float: left;
-    margin-right:20px;
+    display: block;
 }
 
 .views-field-field-imagen-slideshow {
-  width:380px;
-  height:auto;
+
 }
+
+.views-field-field-imagen-slideshow img{
+  width:955px;
+  height:auto;
+  max-width: none;
+
+  z-index: -1;
+}
+
+.slideshow-cuerpo-texto  {
+  background: rgba(104, 104, 104, 0.7) none repeat scroll 0 0;
+  color: rgb(0, 0, 0);
+  margin-top: 180px;
+  padding: 20px;
+  width:auto;
+  height:150px;
+  position: absolute;
+}
+
+.slideshow-cuerpo-texto  p {
+ }
+
 
 .slideshow-inicio .views-content-counter {
     background: rgba(0, 0, 0, 0) url("images/nav_active.png") no-repeat scroll left top;
@@ -1495,6 +1555,10 @@ float: left;
     margin: 0 auto;
     width: 90px;
 }
+
+
+/* hasta aca slideshow inicio */
+
 
 /** VISTA ESPECTACULOS **/
 .view-vista-espectaculos .views-row {
@@ -1551,7 +1615,6 @@ float: left;
 	opacity:0.8;
 }
 
-/* hasta aca slideshow inicio */
 
 
 /** Galería imágenes **/
