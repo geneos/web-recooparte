@@ -93,7 +93,7 @@ body {
 }
 
 a {
-  color: rgb(251, 90, 2);
+  color: rgb(247, 167, 48);
   text-decoration:none;
 }
 
@@ -897,6 +897,7 @@ ul.links {
 
 .view-novedades .views-row img{
 	float: left;
+	margin-right: 20px;
 }
 
 
